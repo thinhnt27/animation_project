@@ -1,16 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ProcessStep } from '../types';
+import { ProcessStep, SubSection } from '../types';
 import ImageCarousel from './ImageCarousel';
 import ParallaxGallery from './ParallaxGallery';
 import HorizontalScrollGallery from './HorizontalScrollGallery';
+import SubSectionGrid from './SubSectionGrid'; // Import new component
 
 interface ProcessStepProps {
   step: ProcessStep;
   index: number;
+  onOpenDrawer: (subSection: SubSection) => void; // New prop for opening drawer
 }
 
-const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index }) => {
+const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index, onOpenDrawer }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [container, setContainer] = useState<HTMLElement | null>(null);
 
@@ -36,6 +38,30 @@ const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index }) => {
     ? step.gallery 
     : (step.imageUrl ? [step.imageUrl] : []);
 
+  // Handle section with sub-sections (like "Development")
+  if (step.subSections && step.subSections.length > 0) {
+    return (
+      <section 
+        ref={containerRef}
+        id={step.id} 
+        className="relative bg-black w-full overflow-hidden py-24 md:py-32"
+      >
+        <div className="w-full max-w-7xl mx-auto px-6 text-center z-10 relative">
+          <div className="flex items-center justify-center gap-4 mb-6">
+              <span className="h-[1px] w-12 bg-brand-gold/50" />
+              <span className="text-brand-gold font-serif italic text-xl">{step.number}</span>
+              <span className="h-[1px] w-12 bg-brand-gold/50" />
+          </div>
+          <h2 className="font-serif text-5xl md:text-8xl text-white mb-8 uppercase tracking-tight">{step.title}</h2>
+          <p className="text-gray-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">{step.description}</p>
+          
+          <SubSectionGrid subSections={step.subSections} onOpenDrawer={onOpenDrawer} />
+        </div>
+      </section>
+    );
+  }
+
+  // Existing horizontal scroll layout
   if (step.layout === 'horizontal-scroll') {
       return (
         <section id={step.id} className="relative bg-black w-full overflow-hidden">
@@ -53,6 +79,7 @@ const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index }) => {
       )
   }
 
+  // Existing full-width gallery layout
   if (step.layout === 'full-width-gallery') {
     return (
       <section 
@@ -81,7 +108,9 @@ const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index }) => {
     );
   }
 
-  if (allImages.length === 0) {
+  // Existing text-only layout (or default split layout if no images/gallery/subsections)
+  // Re-evaluating this logic to ensure it only applies when genuinely no media
+  if (allImages.length === 0 && (!step.subSections || step.subSections.length === 0)) {
       return (
         <section 
             ref={containerRef}
@@ -113,6 +142,7 @@ const ProcessStepComponent: React.FC<ProcessStepProps> = ({ step, index }) => {
       )
   }
 
+  // Default split layout for steps with imageUrl or gallery (but no subSections)
   return (
     <section 
       ref={containerRef}

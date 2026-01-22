@@ -7,14 +7,16 @@ interface ParallaxGalleryProps {
 
 const ParallaxGallery: React.FC<ParallaxGalleryProps> = ({ images }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const [container, setContainer] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    setIsMounted(true);
+    if (containerRef.current) {
+      setContainer(containerRef.current);
+    }
   }, []);
   
   const { scrollYProgress } = useScroll({
-    target: isMounted ? containerRef : undefined,
+    target: container ? { current: container } : undefined,
     offset: ["start end", "end start"]
   });
 
@@ -28,7 +30,7 @@ const ParallaxGallery: React.FC<ParallaxGalleryProps> = ({ images }) => {
   const y2 = useTransform(smoothScroll, [0, 1], [0, 100]);
   const y3 = useTransform(smoothScroll, [0, 1], [0, -150]);
 
-  if (!isMounted) return <div className="min-h-screen bg-black" />;
+  if (!container) return <div className="min-h-screen bg-black" />;
 
   return (
     <div ref={containerRef} className="w-full relative min-h-[120vh] overflow-hidden py-20">

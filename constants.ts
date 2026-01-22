@@ -31,12 +31,12 @@ export const PROCESS_STEPS: ProcessStep[] = [
     imageUrl: "",
     gallery: [
       // Tập hợp ảnh phong phú (50+ ảnh để chia cho 5 hàng)
-      "./img/7d9fdc96-b2cb-4886-ba52-3aede2c7c6a7.jpeg",
-      "./img/b2e1d1f2-e74e-454c-8459-f8fd2d05a25b.jpeg",
-      "./img/ed872530-6d04-42c9-ae80-7e5ab5a5d171.jpeg",
-      "./img/7d9fdc96-b2cb-4886-ba52-3aede2c7c6a7.jpeg",
-      "./img/b2e1d1f2-e74e-454c-8459-f8fd2d05a25b.jpeg",
-      "./img/ed872530-6d04-42c9-ae80-7e5ab5a5d171.jpeg",
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2671&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1496247749665-49cf5bf87565?q=80&w=2541&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2568&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1506459225024-1428097a7e18?q=80&w=2574&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1533130061792-649d45e41234?q=80&w=2670&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1620648378507-4ad3467d0232?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1515536765-9b2a74083791?q=80&w=1974&auto=format&fit=crop",
@@ -205,5 +205,49 @@ export const PROCESS_STEPS: ProcessStep[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop",
     alignLeft: false,
+  },
+  {
+    id: "development",
+    number: "11", // New step, before 01
+    title: "Development",
+    description:
+      "Developing the idea. Our filmmaking process begins in Development, where our storytellers begin to craft the narrative, and our artists define the look of the characters and worlds.",
+    details: ["Concept Art", "Story Beats", "Character Exploration"],
+    alignLeft: true,
+    layout: "split", // Using split layout, but will render a sub-section grid instead of a single image.
+    subSections: [
+      {
+        id: "creative-development",
+        title: "Creative Development",
+        description:
+          "This initial phase focuses on brainstorming, conceptualizing core ideas, and laying the groundwork for the story, characters, and world. Artists explore visual themes and mood, establishing the foundation of the film's aesthetic and narrative.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1579546944686-353d7195982e?q=80&w=2070&auto=format&fit=crop",
+      },
+      {
+        id: "story-ideation",
+        title: "Story Ideation",
+        description:
+          "Storytellers delve into crafting compelling narratives, outlining plot points, character arcs, and thematic elements. This phase is crucial for developing a cohesive and emotionally resonant story that captivates audiences.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1510936279612-c841d7d0840b?q=80&w=2070&auto=format&fit=crop",
+      },
+      {
+        id: "visual-exploration",
+        title: "Visual Exploration",
+        description:
+          "Artists produce a wide range of concept art, including detailed character designs, expansive environment paintings, and evocative color scripts. This helps establish the aesthetic, style, and overall visual language of the film.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2070&auto=format&fit=crop",
+      },
+      {
+        id: "early-prototyping",
+        title: "Early Prototyping",
+        description:
+          "In some cases, early prototypes or quick 3D sculpts are created to test out scale, movement, and interaction with the environment. This iterative process informs later stages of production, allowing for early refinement of ideas.",
+        imageUrl:
+          "https://images.unsplash.com/photo-1620648378507-4ad3467d0232?q=80&w=2070&auto=format&fit=crop",
+      },
+    ],
   },
 ];

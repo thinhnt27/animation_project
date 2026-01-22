@@ -38,11 +38,11 @@ const HorizontalScrollGallery: React.FC<HorizontalScrollGalleryProps> = ({
   // Chia ảnh thành 5 hàng
   const rowCount = 5;
   const rows = Array.from({ length: rowCount }, (_, i) =>
-    images.filter((_, index) => index % rowCount === i)
+    images.filter((_, index) => index % rowCount === i),
   );
 
   return (
-    <div ref={targetRef} className="relative h-[100vh] bg-black">
+    <div ref={targetRef} className="relative h-[400vh] bg-black">
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-10 gap-2 md:gap-4">
         {/* Hàng 1 - Sang Trái */}
         <ScrollRow

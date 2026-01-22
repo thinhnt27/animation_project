@@ -1,4 +1,11 @@
-export type StepLayout = 'split' | 'full-width-gallery' | 'horizontal-scroll';
+export interface SubSection {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+export type StepLayout = 'split' | 'full-width-gallery' | 'horizontal-scroll' | 'text-only';
 
 export interface ProcessStep {
   id: string;
@@ -6,8 +13,9 @@ export interface ProcessStep {
   title: string;
   description: string;
   details: string[];
-  imageUrl?: string; // Made optional
-  gallery?: string[]; // Optional list of additional images for a carousel/slider
+  imageUrl?: string;
+  gallery?: string[];
   alignLeft: boolean;
-  layout?: StepLayout; // Defaults to 'split'
+  layout?: StepLayout;
+  subSections?: SubSection[]; // New: Optional list of sub-sections for a step
 }
